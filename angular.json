@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "quartz"
+  "defaultProject": "quartz",
+  "cli": {
+    "analytics": "6317d253-eaec-4091-bb71-87e292c57ece"
+  }
 }
