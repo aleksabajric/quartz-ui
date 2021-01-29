@@ -12,34 +12,37 @@ import { environment } from 'src/environments/environment';
 })
 
 export class HomeComponent implements OnInit {
+  private tokenKey = 'token';
 
   constructor(private api:GetApiService,private router: Router, private route: ActivatedRoute,private http: HttpClient) { }
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {    
-    } );
-  }
+  ngOnInit() {
+    localStorage.setItem(this.tokenKey, this.route.snapshot.queryParams['token']);
+
+    this.api.findAll().subscribe((res)=>{
+      res.map((i: any)=> {
+        const job = {'id': i['id'], 'name': i['name'], 'description': i['description'], 'cron': i['cron']};
+        this.jobResponse.push(job);
+      })
+    });
+    console.log(this.jobResponse);
+}
   
   title = 'Quartz App';
-  jobArray: string[] = [];
+  jobResponse: any = [];
 
-  saveJob(value: string) {
-
-    this.api.save().subscribe(data => {
-      this.title = data.title;
-  })
-    
-    this.jobArray.push(value);
-    console.log(this.jobArray);
-    
+  saveJob(job: string, description: string, cron: string,) {
+    this.api.save(job, description, cron)
+    this.jobResponse.push({'name':job});
   }
 
-  updateJob(){
-    this.api.save().subscribe(data => {
-  })
+  updateJob(job: string, description: string, cron: string){
+    this.api.save(job, description, cron)
   }
 
-  deleteItem() {   console.log("delete item")  }
+  deleteJob(id : string) { 
+    this.api.delete(id);
+    }
 
 
 }

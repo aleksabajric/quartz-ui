@@ -4,7 +4,9 @@ import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-callback',
-  templateUrl: './callback.component.html',
+  template: `
+  <p>Redirecting...</p>
+  `,
   styleUrls: ['./callback.component.scss']
 })
 export class CallbackComponent implements OnInit {
@@ -16,6 +18,7 @@ export class CallbackComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(p => {
+      console.log("Test")
       this.appComponent.fetchToken(p.code, p.state).subscribe(data => {
         this.appComponent.updateToken(data.accessToken);
         console.log(data.accessToken);

@@ -13,20 +13,22 @@ export class GetApiService {
     private appComponent: AppComponent
   ) { }
 
-  apiCallGet(){
-    return this.http.get<any>('https://jsonplaceholder.typicode.com/todos/1');
+  findAll(){
+    return this.http.get<any>(environment.baseUrl + "/quartz/findAll");
   }
 
-  save() {
-    let headers = new HttpHeaders({
-      'Accept': 'application/json',
-      'Access-Control-Allow-Credentials': 'true',
-      'Access-Control-Allow-Origin': '*',
-      'Authorization': `Bearer ${this.appComponent.getToken()}`,
-  });
+  save(name: string, description: string, cron: string) {
   console.log(this.appComponent.getToken());
-  let options = { headers: headers };
-    return this.http.post<any>(environment.baseUrl + "/quartz/save", {name: 'Angular job', description: "Angular Descrition", cron: "0 0/1 * 1/1 * ? *"}, options)
+  const data = {'name': name, 'description': description, 'cron': cron}
+    return this.http.post<any>(environment.baseUrl + "/quartz/save", data).subscribe((res)=>{
+      console.log("Resultat: ", res)
+    })
+  }
+
+  delete(id: string){
+    return this.http.delete(environment.baseUrl + "/quartz/delete?jobId=" + id).subscribe(()=>{
+      console.log("izbrisan: ", id)
+    });
   }
 
 }

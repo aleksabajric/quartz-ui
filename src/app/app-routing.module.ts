@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'callback', component: CallbackComponent},
   { path: 'login', component: AppComponent},
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'home', component: HomeComponent},
 ];
 
 @NgModule({

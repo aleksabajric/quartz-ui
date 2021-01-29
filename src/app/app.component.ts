@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Injectable} from '@angular/core';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -24,6 +25,12 @@ export class AppComponent {
 
 
 constructor(private router: Router, private route: ActivatedRoute,private http: HttpClient){
+}
+
+ngOnInit() {
+  this.route.params.subscribe(event => {
+ 
+ });
 }
 
   login() {

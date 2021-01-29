@@ -19,7 +19,7 @@ export class AuthHeaderInterceptor implements HttpInterceptor {
       setHeaders: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: 'Bearer ' + this.appComponent.getToken()
+        Authorization: 'Bearer ' + localStorage.getItem('token')
       }
     });
     return next.handle(req);

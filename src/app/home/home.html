@@ -297,13 +297,14 @@
                 <h1 class="text-center text-primary">{{title}}</h1>
                 <div>
                   <input type="text" #job class="form-control" placeholder="Job" name="job" ngModel><br>
+                  <input type="text" #description class="form-control" placeholder="Description" name="description" ngModel><br>
                   <input type="text" #cronExpression class="form-control" placeholder="Add Cron Expression"
-                    name="cronExpression" ngModel><br>
+                    name="cronExpression" ngModel><br> 
                 </div>
-                <span class="input-group-text" (click)="saveJob(job.value)"><i class="material-icons">add</i></span>
+                <span class="input-group-text" (click)="saveJob(job.value, description.value, cronExpression.value)"><i class="material-icons">add</i></span>
                 <div class="data">
                   <ul class="list-instyled">
-                    <li *ngFor="let job of jobArray">{{job}} <i class="material-icons">delete</i></li>
+                    <li *ngFor="let job of jobResponse">{{job['name']}} cron: {{job['cron']}} <i class="material-icons">edit</i> <i class="material-icons" (click)="deleteJob(job['id'])">delete</i></li>
                   </ul>
                 </div>
               </div>
