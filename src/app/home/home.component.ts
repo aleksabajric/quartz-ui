@@ -36,12 +36,14 @@ export class HomeComponent implements OnInit {
     this.jobResponse.push({'name':job});
   }
 
-  updateJob(job: string, description: string, cron: string){
-    this.api.save(job, description, cron)
+  updateJob(id:string, cron: string){
+    this.api.update(id , cron);
+    location.reload();
   }
 
   deleteJob(id : string) { 
     this.api.delete(id);
+    location.reload();
     }
 
 

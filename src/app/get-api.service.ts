@@ -18,9 +18,15 @@ export class GetApiService {
   }
 
   save(name: string, description: string, cron: string) {
-  console.log(this.appComponent.getToken());
   const data = {'name': name, 'description': description, 'cron': cron}
     return this.http.post<any>(environment.baseUrl + "/quartz/save", data).subscribe((res)=>{
+      console.log("Resultat: ", res)
+    })
+  }
+
+  update (id: string, cron: string){
+    const data = {'id': id,'cron': cron}
+    return this.http.put<any>(environment.baseUrl + "/quartz/update", data).subscribe((res)=>{
       console.log("Resultat: ", res)
     })
   }

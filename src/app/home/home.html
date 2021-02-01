@@ -304,7 +304,9 @@
                 <span class="input-group-text" (click)="saveJob(job.value, description.value, cronExpression.value)"><i class="material-icons">add</i></span>
                 <div class="data">
                   <ul class="list-instyled">
-                    <li *ngFor="let job of jobResponse">{{job['name']}} cron: {{job['cron']}} <i class="material-icons">edit</i> <i class="material-icons" (click)="deleteJob(job['id'])">delete</i></li>
+                    <li *ngFor="let job of jobResponse">
+                      <input type="text" #update class="form-control" placeholder=" {{job['name']}} cron: {{job['cron']}}"
+                    name="updateJob" ngModel size="30"><i class="material-icons" (click)="updateJob(job['id'], update.value)">edit</i> <i class="material-icons" (click)="deleteJob(job['id'])">delete</i></li>
                   </ul>
                 </div>
               </div>
